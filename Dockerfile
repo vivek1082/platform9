@@ -17,10 +17,12 @@ RUN mvn -f /platform9Git clean package
 
 # Build release image
 FROM openjdk:12-alpine
+VOLUME /tmp
+
 
 #Copy result
 WORKDIR /app
-COPY  /platform9/target/diwalibulbs-0.0.1-SNAPSHOT.jar /app/
+COPY  /platform9/target/diwalibulbs-0.0.1-SNAPSHOT.jar app.jar
 
 #Add user and group for running as unprivileged user
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
