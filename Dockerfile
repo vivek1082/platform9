@@ -13,7 +13,7 @@ RUN mkdir /platform9Git
 RUN git clone --branch master https://github.com/vivek1082/platform9.git /platform9Git
 
 #Build
-RUN mvn -f /platform9Git clean install
+RUN mvn -f /platform9Git clean package
 
 # Build release image
 FROM openjdk:12-alpine
