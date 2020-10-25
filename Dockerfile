@@ -20,7 +20,7 @@ FROM openjdk:12-alpine
 
 #Copy result
 WORKDIR /platform9Git
-COPY /platform9/target/diwalibulbs-0.0.1-SNAPSHOT.jar .
+COPY /platform9/target/diwalibulb*.jar .
 
 #Add user and group for running as unprivileged user
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
