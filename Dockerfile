@@ -10,7 +10,7 @@ RUN apk add maven
 #Git
 RUN apk add git
 RUN mkdir /platform9Git
-RUN gh repo clone vivek1082/platform9 /platform9Git
+RUN git clone vivek1082/platform9 /platform9Git
 
 #Build
 RUN mvn -f /platform9Git clean install
