@@ -22,6 +22,7 @@ FROM openjdk:12-alpine
 
 #Copy result
 WORKDIR /app
+RUN ls -l
 COPY  /platform9/target/diwalibulbs-0.0.1-SNAPSHOT.jar app.jar
 
 #Add user and group for running as unprivileged user
