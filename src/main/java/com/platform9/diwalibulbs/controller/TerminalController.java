@@ -5,10 +5,7 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,38 +19,21 @@ import com.platform9.diwalibulbs.exception.BadSwitchInputException;
 import com.platform9.diwalibulbs.services.CountPositionService;
 import com.platform9.diwalibulbs.utility.FileUtility;
 
-@Controller
-@RequestMapping(value = "/**")
-public class LightsController {
+@Component
+public class TerminalController {
 
 	@Autowired
 	FileUtility fileUtility;
-
 	@Autowired
 	CountPositionService countPositionService;
 
-	@RequestMapping(value = "/hello",method = RequestMethod.GET)
-	public String handler(Model model) {
-		model.addAttribute("msg", "a jar msg");
-		return "index";
-	}
-	public ResponseEntity<OutputBulbList> showLightBulbs(@RequestPart("file") MultipartFile input)
-			throws BadBulbsFileException, BadSwitchInputException, BadOnOffInputException,
-			BadBulbArraySizeInputException, ArgumentMismatchException {
-		if (null == input.getOriginalFilename())
-			throw new BadBulbsFileException("File not provided");
+	public ResponseEntity<OutputBulbList> showLightBulbs() throws BadBulbsFileException, BadSwitchInputException,
+			BadOnOffInputException, BadBulbArraySizeInputException, ArgumentMismatchException {
 		OutputBulbList outputBulbList = null;
-		try {
-			byte[] fileBites = input.getBytes();
-			TotalInputBulbs bulbList = fileUtility.readFileBytes(fileBites);
+		System.out.println("Enter Light Bulbs Input as per Input Format");
+		TotalInputBulbs bulbList = fileUtility.readTerminalInput();
 
-			outputBulbList = countPositionService.countSwitch(bulbList);
-		} catch (IOException e) {
-			throw new BadBulbsFileException("IO exception occured try again");
-		}
+		outputBulbList = countPositionService.countSwitch(bulbList);
 		return new ResponseEntity<OutputBulbList>(outputBulbList, HttpStatus.OK);
 	}
-	
-	
-
 }

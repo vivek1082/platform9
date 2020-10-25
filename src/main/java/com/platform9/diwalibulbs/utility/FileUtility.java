@@ -32,7 +32,19 @@ public class FileUtility {
 			throw new BadBulbsFileException("Input Error happened on resources");
 		}
 
-		return null;
+		return totalInputBulbs;
+	}
+
+	public TotalInputBulbs readTerminalInput()
+			throws ArgumentMismatchException, BadSwitchInputException, BadOnOffInputException, BadBulbsFileException {
+		TotalInputBulbs totalInputBulbs = null;
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+			totalInputBulbs = inputParser(reader);
+		} catch (IOException e) {
+			throw new BadBulbsFileException("Input Error happened on resources");
+		}
+
+		return totalInputBulbs;
 	}
 
 	public TotalInputBulbs inputParser(BufferedReader reader)
@@ -50,8 +62,7 @@ public class FileUtility {
 				InputBulbString lines = new InputBulbString();
 				int bulbStringLength = Integer.parseInt(reader.readLine());
 				int noOfSwitch = Integer.parseInt(reader.readLine());
-				if (noOfSwitch > bulbStringLength)
-					throw new BadSwitchInputException("No of switch exceeds Bulb String - test case no " + i);
+
 				lines.setNoOfSwitch(noOfSwitch);
 				String bulbString = reader.readLine();
 				if (bulbStringLength != bulbString.length())
@@ -75,8 +86,8 @@ public class FileUtility {
 		List<Integer> setBits = new ArrayList<Integer>();
 		if (bulbString != null) {
 			for (int i = 0; i < bulbString.length(); i++) {
-				if (bulbString.charAt(i) != BulbState.ON.getState()
-						|| bulbString.charAt(i) != BulbState.OFF.getState()) {
+				if (!(bulbString.charAt(i) != BulbState.ON.getState()
+						^ bulbString.charAt(i) != BulbState.OFF.getState())) {
 					throw new BadOnOffInputException("String contans other than 0 or 1 at test case " + testNo);
 				}
 				if (bulbString.charAt(i) == BulbState.ON.getState()) {
