@@ -17,7 +17,7 @@ RUN mvn -f /platform9Git clean package
 
 # Build release image
 FROM openjdk:12-alpine
-VOLUME /tmp
+
 
 
 #Copy result
