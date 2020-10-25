@@ -22,7 +22,7 @@ FROM openjdk:12-alpine
 
 #Copy result
 WORKDIR /app
-RUN ls -l /var/lib/docker/tmp/docker-*/platform9/target/
+RUN ls -l /var/lib/docker/tmp/
 COPY  /platform9/target/diwalibulbs-0.0.1-SNAPSHOT.jar app.jar
 
 #Add user and group for running as unprivileged user
