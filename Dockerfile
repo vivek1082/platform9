@@ -1,14 +1,30 @@
-FROM alpine/git as builder
-WORKDIR /app
-RUN git clone https://github.com/vivek1082/platform9.git 
+#Where we start
+FROM openjdk:12-alpine AS builder
 
-FROM maven:3.5-jdk-8-alpine app as vivek
-WORKDIR /app
-COPY --from=builder /app/platform9 
-RUN mvn install 
+#Get APK up to date
+RUN apk update && apk upgrade
 
-FROM openjdk:8-jre-alpine
-WORKDIR /app
-COPY --from=vivek /app/target/diwalibulbs-0.0.1-SNAPSHOT.jar /app 
-EXPOSE 8080
-CMD ["java -jar diwalibulbs-0.0.1-SNAPSHOT.jar"]
+#Install Maven
+RUN apk add maven
+
+#Git
+RUN apk add git
+RUN git clone --branch master https://github.com/vivek1082/platform9.git /platform9Git
+
+#Build
+RUN mvn -f /platform9Git clean package 
+
+# Build release image
+FROM openjdk:12-alpine
+
+
+
+#Copy result
+COPY   /platform9/target/diwalibulbs-0.0.1-SNAPSHOT.jar app.jar
+
+#Add user and group for running as unprivileged user
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+USER appuser
+
+#Define how to start
+ENTRYPOINT ["java", "-jar", "diwalibulbs-0.0.1-SNAPSHOT.jar"]
