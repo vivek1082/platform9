@@ -13,7 +13,7 @@ RUN mkdir /platform9Git
 RUN git clone --branch master https://github.com/vivek1082/platform9.git /platform9Git
 
 #Build
-RUN mvn -f /platform9Git clean package
+RUN mvn -f /platform9Git clean package (2)
 
 # Build release image
 FROM openjdk:12-alpine
@@ -21,9 +21,7 @@ FROM openjdk:12-alpine
 
 
 #Copy result
-WORKDIR /app
-RUN ls -l /var/lib/docker/tmp/
-COPY  /platform9/target/diwalibulbs-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=2  /platform9/target/diwalibulbs-0.0.1-SNAPSHOT.jar app.jar
 
 #Add user and group for running as unprivileged user
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
