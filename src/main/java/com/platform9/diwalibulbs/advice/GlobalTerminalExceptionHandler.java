@@ -10,7 +10,6 @@ import com.platform9.diwalibulbs.exception.BadBulbsFileException;
 import com.platform9.diwalibulbs.exception.BadOnOffInputException;
 import com.platform9.diwalibulbs.exception.BadSwitchInputException;
 
-@Component
 @ControllerAdvice
 public class GlobalTerminalExceptionHandler {
 
