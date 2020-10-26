@@ -9,6 +9,6 @@ RUN mvn install
 
 FROM openjdk:8-jre-alpine
 WORKDIR /app
-COPY --from=vivek /app/target/diwalibulbs-0.0.1-SNAPSHOT.jar /app (4)
+COPY --from=vivek /app/target/diwalibulbs-0.0.1-SNAPSHOT.jar /app 
 EXPOSE 8080
 CMD ["java -jar diwalibulbs-0.0.1-SNAPSHOT.jar"]
