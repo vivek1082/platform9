@@ -1,10 +1,10 @@
-#Code Enabled in File Input Mode -- An input file has to pass via command line.
+**##Code Enabled in File Input Mode -- An input file has to pass via command line.**
 
-#To Execute Programme : Steps :
+**##To Execute Programme : Steps :
     #1. Create a input file with required Test cases.
     #2. Download executable jar from https://github.com/vivek1082/platform9/tree/master/target
     #3. GO to downloaded jar location and run following command, system requirement is jdk 8.0
-    #2. Run "java -jar diwalibulbs-0.0.1-SNAPSHOT.jar <input_file_location>"
+    #2. Run "java -jar diwalibulbs-0.0.1-SNAPSHOT.jar <input_file_location>"**
 # platform9
 coding solution for platform9
 Repo For Solution for Coding Challenge by Platform9.
