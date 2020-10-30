@@ -7,7 +7,8 @@
     4. Run "java -jar diwalibulbs-0.0.1-SNAPSHOT.jar <input_file_location>"**<br/>
     
 ##**Sample Input File**
-[https://github.com/vivek1082/platform9/blob/master/test.txt](https://github.com/vivek1082/platform9/blob/master/test.txt)
+    **DO not provide space in between input string -- e.g 111100000 - valid; 1 0 1 0 1 0 -- invalid**
+[https://github.com/vivek1082/platform9/blob/master/test.txt](https://github.com/vivek1082/platform9/blob/master/test.txt)<br/>
 
 ## platform9
 coding solution for platform9
