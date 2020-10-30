@@ -91,7 +91,7 @@ public class FileUtility {
 				throw new ArgumentMismatchException("Not valid no of test cases as given");
 			}
 			//input still there, less coutn of test case provided
-			if(reader.readLine()!=null || reader.readLine().trim()!="") {
+			if(reader.readLine()!=null && reader.readLine().trim()!="") {
 				throw new ArgumentMismatchException("input still there, less coutn of test case provided");
 			}
 				
