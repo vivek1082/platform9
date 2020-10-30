@@ -7,6 +7,7 @@
     4. Run "java -jar diwalibulbs-0.0.1-SNAPSHOT.jar <input_file_location>"**<br/>
     
 ##**Sample Input File**
+[https://github.com/vivek1082/platform9/blob/master/test.txt](https://github.com/vivek1082/platform9/blob/master/test.txt)
 
 ## platform9
 coding solution for platform9
