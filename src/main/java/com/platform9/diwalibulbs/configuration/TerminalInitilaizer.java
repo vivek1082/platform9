@@ -15,7 +15,7 @@ import com.platform9.diwalibulbs.exception.BadBulbsFileException;
 import com.platform9.diwalibulbs.exception.BadOnOffInputException;
 import com.platform9.diwalibulbs.exception.BadSwitchInputException;
 
-@Component
+//@Component
 public class TerminalInitilaizer {
 
 	@Autowired

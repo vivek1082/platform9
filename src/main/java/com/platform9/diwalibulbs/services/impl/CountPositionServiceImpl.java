@@ -32,6 +32,7 @@ public class CountPositionServiceImpl implements CountPositionService {
 			int size = bulbLines.size();
 			setMaxSparkedBulb(maxSparkedBulb, noOfSwitch, bulbLines, size);
 			sparkedBulbs.add(maxSparkedBulb);
+			maxSparkedBulb.setGivenInput(bulbInput.getBulbs().toString());
 
 		}
 

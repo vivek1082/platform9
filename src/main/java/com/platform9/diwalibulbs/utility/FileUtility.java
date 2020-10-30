@@ -2,11 +2,12 @@ package com.platform9.diwalibulbs.utility;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,18 @@ import com.platform9.diwalibulbs.exception.BadSwitchInputException;
 
 @Controller
 public class FileUtility {
+
+	public TotalInputBulbs readFile(File file)
+			throws ArgumentMismatchException, BadSwitchInputException, BadOnOffInputException, BadBulbsFileException {
+		TotalInputBulbs totalInputBulbs = null;
+		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+			totalInputBulbs = inputParser(reader);
+		} catch (IOException e) {
+			throw new BadBulbsFileException("Input Error happened on resources");
+		}
+
+		return totalInputBulbs;
+	}
 
 	public TotalInputBulbs readFileBytes(byte[] file)
 			throws ArgumentMismatchException, BadSwitchInputException, BadOnOffInputException, BadBulbsFileException {
@@ -53,21 +66,23 @@ public class FileUtility {
 		TotalInputBulbs totalInputBulbs = new TotalInputBulbs();
 		List<InputBulbString> bulbStrings = null;
 		try {
-			int noOfTestCase = Integer.parseInt(reader.readLine());
+			int noOfTestCase = Integer.parseInt(reader.readLine().trim());
 			int actualTestCase = 0;
 			bulbStrings = new ArrayList<InputBulbString>(noOfTestCase);
 			totalInputBulbs.setBulbString(bulbStrings);
 
 			for (int i = 0; i < noOfTestCase; i++) {
 				InputBulbString lines = new InputBulbString();
-				int bulbStringLength = Integer.parseInt(reader.readLine());
-				int noOfSwitch = Integer.parseInt(reader.readLine());
+				int bulbStringLength = Integer.parseInt(reader.readLine().trim());
+				int noOfSwitch = Integer.parseInt(reader.readLine().trim());
+				if(noOfSwitch < 0)
+					noOfSwitch =0;
 
 				lines.setNoOfSwitch(noOfSwitch);
 				String bulbString = reader.readLine();
 				if (bulbStringLength != bulbString.length())
 					throw new BadOnOffInputException("Given Bulb String does not match given length in test case " + i);
-				bulbs = convertBulbString(bulbString, i);
+				bulbs = convertBulbString(bulbString.trim(), i);
 				lines.setBulbs(bulbs);
 				bulbStrings.add(lines);
 				actualTestCase++;
@@ -75,10 +90,17 @@ public class FileUtility {
 			if (actualTestCase != noOfTestCase) {
 				throw new ArgumentMismatchException("Not valid no of test cases as given");
 			}
+			//input still there, less coutn of test case provided
+			if(reader.readLine()!=null || reader.readLine().trim()!="") {
+				throw new ArgumentMismatchException("input still there, less coutn of test case provided");
+			}
+				
 		} catch (NumberFormatException | IOException e) {
 			throw new ArgumentMismatchException("Not a valid number");
+		} catch (NullPointerException e) {
+			throw new ArgumentMismatchException("Check file Input for proper Test case");
 		}
-
+		
 		return totalInputBulbs;
 	}
 
@@ -100,5 +122,7 @@ public class FileUtility {
 
 		return setBits;
 	}
+	
+	
 
 }

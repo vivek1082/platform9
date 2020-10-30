@@ -22,8 +22,9 @@ import com.platform9.diwalibulbs.exception.BadSwitchInputException;
 import com.platform9.diwalibulbs.services.CountPositionService;
 import com.platform9.diwalibulbs.utility.FileUtility;
 
-@Controller
-@RequestMapping(value = "/**")
+//disabling for now
+//@Controller
+//@RequestMapping(value = "/**")
 public class LightsController {
 
 	@Autowired

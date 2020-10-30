@@ -7,6 +7,16 @@ public class MaxSparkedBulb {
 	private int maxOnBulbs;
 	
 	private List<Integer> bulbPosition;
+	
+	private String givenInput;
+
+	public String getGivenInput() {
+		return givenInput;
+	}
+
+	public void setGivenInput(String givenInput) {
+		this.givenInput = givenInput;
+	}
 
 	public int getMaxOnBulbs() {
 		return maxOnBulbs;
@@ -26,8 +36,10 @@ public class MaxSparkedBulb {
 
 	@Override
 	public String toString() {
-		return "MaxSparkedBulb [maxOnBulbs=" + maxOnBulbs + ", bulbPosition=" + bulbPosition + "]";
+		return "MaxSparkedBulb [maxOnBulbs=" + maxOnBulbs + ", bulbPosition=" + bulbPosition + ", givenInput="
+				+ givenInput + "]";
 	}
+
 	
 	
 	

@@ -1,13 +1,11 @@
 package com.platform9.diwalibulbs.controller;
 
-import java.io.IOException;
+import java.io.File;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.platform9.diwalibulbs.dto.OutputBulbList;
 import com.platform9.diwalibulbs.dto.TotalInputBulbs;
@@ -35,5 +33,14 @@ public class TerminalController {
 
 		outputBulbList = countPositionService.countSwitch(bulbList);
 		return new ResponseEntity<OutputBulbList>(outputBulbList, HttpStatus.OK);
+	}
+
+	public OutputBulbList showLightBulbs(File file) throws BadBulbsFileException,
+			BadSwitchInputException, BadOnOffInputException, BadBulbArraySizeInputException, ArgumentMismatchException {
+		OutputBulbList outputBulbList = null;
+		TotalInputBulbs bulbList = fileUtility.readFile(file);
+
+		outputBulbList = countPositionService.countSwitch(bulbList);
+		return  outputBulbList;
 	}
 }
