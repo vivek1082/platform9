@@ -6,7 +6,7 @@
     3. GO to downloaded jar location and run following command, system requirement is jdk 8.0<br/>
     4. Run "java -jar diwalibulbs-0.0.1-SNAPSHOT.jar <input_file_location>"**<br/>
     
-##**Sample Input File**
+##**Sample Input File**<br/>
     **DO not provide space in between input string -- e.g 111100000 - valid; 1 0 1 0 1 0 -- invalid**
 [https://github.com/vivek1082/platform9/blob/master/test.txt](https://github.com/vivek1082/platform9/blob/master/test.txt)<br/>
 
